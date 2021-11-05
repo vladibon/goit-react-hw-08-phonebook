@@ -8,19 +8,19 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "modern-normalize": "^1.1.0",
+    "nanoid": "^3.1.30",
+    "node-sass": "^6.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -38,19 +38,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
-    "prettier": "^2.4.1"
-  },
-  "lint-staged": {
-    "src/**/*.{json,css,scss,md}": "prettier --write",
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --cache --fix"
     ]
   }
 }
