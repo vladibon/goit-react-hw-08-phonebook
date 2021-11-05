@@ -1,0 +1,25 @@
+@import 'styles/shared';
+
+body {
+  margin: 0;
+  color: var(--black-color);
+  font-family: var(--primary-font-stack);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+p {
+  margin: 0;
+}

@@ -4,7 +4,6 @@ import { Container } from './components/Container';
 import { ContactForm } from './components/ContactForm';
 import { Filter } from './components/Filter';
 import { ContactList } from './components/ContactList';
-// import s from './App.module.css';
 
 const CONTACTS = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },

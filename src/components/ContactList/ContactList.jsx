@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-// import s from './ContactList.module.css';
+import s from './ContactList.module.scss';
 
 class ContactList extends Component {
   static propTypes = {
@@ -17,17 +17,20 @@ class ContactList extends Component {
     const { contacts, deleteContact } = this.props;
 
     return (
-      <ul>
+      <ul className={s.list}>
         {contacts.map(
           ({ id, name, number }) =>
             this.findMatches(name) && (
-              <li key={id}>
-                <p>
-                  {name}: {number}
-                </p>
+              <li className={s.item} key={id}>
+                <p className={s.name}>{name}</p>
+                <p className={s.number}>{number}</p>
 
-                <button type='button' onClick={() => deleteContact(id)}>
-                  Delete
+                <button
+                  className={s.button}
+                  type='button'
+                  onClick={() => deleteContact(id)}
+                >
+                  X
                 </button>
               </li>
             ),

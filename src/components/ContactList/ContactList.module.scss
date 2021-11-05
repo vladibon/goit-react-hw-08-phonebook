@@ -1,0 +1,38 @@
+@import 'styles/shared';
+
+.list {
+  @extend %list;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.name {
+  min-width: calc(50% - 15px);
+  margin-right: 30px;
+}
+
+.number {
+  margin-right: auto;
+}
+
+.button {
+  @extend %button;
+  min-width: 30px;
+  color: var(--white-color);
+  background-color: var(--delete-color);
+  opacity: 0.86;
+  transition: opacity var(--animation);
+}
+
+.button:hover,
+.button:focus {
+  opacity: 1;
+}
