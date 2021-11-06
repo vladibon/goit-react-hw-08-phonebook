@@ -7,34 +7,28 @@ class ContactList extends Component {
     contacts: PropTypes.arrayOf(
       PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
     ).isRequired,
-    filter: PropTypes.string.isRequired,
+    deleteContact: PropTypes.func.isRequired,
   };
-
-  findMatches = name =>
-    name.toLowerCase().includes(this.props.filter.toLowerCase().trim());
 
   render() {
     const { contacts, deleteContact } = this.props;
 
     return (
       <ul className={s.list}>
-        {contacts.map(
-          ({ id, name, number }) =>
-            this.findMatches(name) && (
-              <li className={s.item} key={id}>
-                <p className={s.name}>{name}</p>
-                <p className={s.number}>{number}</p>
+        {contacts.map(({ id, name, number }) => (
+          <li className={s.item} key={id}>
+            <p className={s.name}>{name}</p>
+            <p className={s.number}>{number}</p>
 
-                <button
-                  className={s.button}
-                  type='button'
-                  onClick={() => deleteContact(id)}
-                >
-                  X
-                </button>
-              </li>
-            ),
-        )}
+            <button
+              className={s.button}
+              type='button'
+              onClick={() => deleteContact(id)}
+            >
+              x
+            </button>
+          </li>
+        ))}
       </ul>
     );
   }
