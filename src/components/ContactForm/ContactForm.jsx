@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.scss';
 
@@ -7,16 +7,12 @@ const INITIAL_STATE = {
   number: '',
 };
 
-class ContactForm extends Component {
+class ContactForm extends PureComponent {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
 
   state = { ...INITIAL_STATE };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState !== this.state;
-  }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
