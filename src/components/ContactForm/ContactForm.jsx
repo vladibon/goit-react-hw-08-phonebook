@@ -14,6 +14,10 @@ class ContactForm extends Component {
 
   state = { ...INITIAL_STATE };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState !== this.state;
+  }
+
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };

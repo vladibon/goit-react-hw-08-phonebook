@@ -6,16 +6,24 @@ import { ContactForm } from './components/ContactForm';
 import { Filter } from './components/Filter';
 import { ContactList } from './components/ContactList';
 
-const CONTACTS = [
-  { id: 'b1756kN1', name: 'Dmytro Iarkovenko', number: '+380671234567' },
-  { id: '6QWKkIKu', name: 'Vladimir Bondar', number: '+380671356969' },
-];
-
 class App extends Component {
   state = {
-    contacts: [...CONTACTS],
+    contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const storedContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    storedContacts && this.setState({ contacts: storedContacts });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const currentContacts = this.state.contacts;
+
+    currentContacts !== prevState.contacts &&
+      localStorage.setItem('contacts', JSON.stringify(currentContacts));
+  }
 
   handleSubmit = newContact => {
     this.state.contacts.find(({ name }) => name === newContact.name)
