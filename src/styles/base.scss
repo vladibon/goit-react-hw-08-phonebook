@@ -2,8 +2,8 @@
 
 body {
   margin: 0;
-  color: var(--black-color);
-  font-family: var(--primary-font-stack);
+  color: $black-color;
+  font-family: $primary-font-stack;
   font-size: 18px;
   line-height: 1.4;
 }

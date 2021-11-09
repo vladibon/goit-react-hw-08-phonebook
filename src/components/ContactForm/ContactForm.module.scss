@@ -30,11 +30,12 @@
   @extend %button;
   min-width: 100px;
   padding: 10px;
-  color: var(--white-color);
-  background-color: var(--button-color);
-  box-shadow: var(--shadow);
+  color: $white-color;
+  background-color: $button-color;
+
+  box-shadow: $shadow;
   opacity: 0.86;
-  transition: opacity var(--animation);
+  transition: opacity $animation;
 }
 
 .button:hover,
