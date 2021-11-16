@@ -11,8 +11,8 @@ function Input({
   required = false,
   onChange,
 }) {
-  const handleChange = e => {
-    onChange(e.target.value);
+  const handleChange = ({ target }) => {
+    onChange(target.value);
   };
 
   return (
