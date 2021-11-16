@@ -1,72 +1,55 @@
-import { PureComponent } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Input } from '../Input/Input';
 import s from './ContactForm.module.scss';
 
-const INITIAL_STATE = {
-  name: '',
-  number: '',
-};
+function ContactForm({ onSubmit }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-class ContactForm extends PureComponent {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
-
-  state = { ...INITIAL_STATE };
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state);
-    this.reset();
+    onSubmit({ name, number });
+    clearForm();
   };
 
-  reset = () => {
-    this.setState({ ...INITIAL_STATE });
+  const clearForm = () => {
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    const { name, number } = this.state;
-
-    return (
-      <form className={s.form} onSubmit={this.handleSubmit}>
-        <label className={s.field}>
-          <span className={s.label}>Name</span>
-          <input
-            className={s.input}
-            type='text'
-            name='name'
-            value={name}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-            onChange={this.handleChange}
-          />
-        </label>
-
-        <label className={s.field}>
-          <span className={s.label}>Number</span>
-          <input
-            className={s.input}
-            type='tel'
-            name='number'
-            value={number}
-            pattern='\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
-            title='Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +'
-            required
-            onChange={this.handleChange}
-          />
-        </label>
-        <button className={s.button} type='submit'>
-          Add contact
-        </button>
-      </form>
-    );
-  }
+  return (
+    <form className={s.form} onSubmit={handleSubmit}>
+      <Input
+        type='text'
+        name='name'
+        labelName='Name'
+        value={name}
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+        required
+        onChange={setName}
+      />
+      <Input
+        type='tel'
+        name='number'
+        labelName='Number'
+        value={number}
+        pattern='\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
+        title='Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +'
+        required
+        onChange={setNumber}
+      />
+      <button className={s.button} type='submit'>
+        Add contact
+      </button>
+    </form>
+  );
 }
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export { ContactForm };
