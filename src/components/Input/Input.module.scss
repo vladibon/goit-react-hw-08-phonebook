@@ -1,7 +1,13 @@
+@import 'styles/shared';
+
 .field {
   display: block;
   width: calc(50% - 15px);
   margin-bottom: 20px;
+
+  &:nth-child(2n + 1) {
+    margin-right: 30px;
+  }
 }
 
 .label {

@@ -25,7 +25,9 @@
 
 .button {
   @extend %button;
+  @extend %flexCentered;
   min-width: 30px;
+  padding: 4px;
   color: $white-color;
   background-color: $delete-color;
   opacity: 0.86;
