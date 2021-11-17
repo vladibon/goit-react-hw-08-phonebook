@@ -35,6 +35,8 @@ function App() {
     );
   };
 
+  const visibleContacts = filterContacts();
+
   return (
     <Container>
       <h1>Phonebook</h1>
@@ -49,11 +51,8 @@ function App() {
         onChange={setFilter}
       />
 
-      {contacts.length > 0 && (
-        <ContactList
-          contacts={filterContacts()}
-          deleteContact={deleteContact}
-        />
+      {visibleContacts.length > 0 && (
+        <ContactList contacts={visibleContacts} deleteContact={deleteContact} />
       )}
     </Container>
   );
