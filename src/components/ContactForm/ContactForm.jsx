@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'components/Input';
 import s from './ContactForm.module.scss';
@@ -52,4 +52,6 @@ ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export { ContactForm };
+const MemoContactForm = memo(ContactForm);
+
+export { MemoContactForm as ContactForm };

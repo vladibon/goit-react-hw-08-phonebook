@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix';
 import { Container } from 'components/Container';
@@ -11,15 +11,21 @@ function App() {
   const [contacts, setContacts] = useLocalStorage('contacts', []);
   const [filter, setFilter] = useState('');
 
-  const handleSubmit = ({ name, number }) => {
-    contacts.find(contact => contact.name === name)
-      ? Report.warning(
-          `Can't add this contact!`,
-          `${name} is already in contacts.`,
-          'OK',
-        )
-      : setContacts(contacts => [{ id: nanoid(8), name, number }, ...contacts]);
-  };
+  const handleSubmit = useCallback(
+    ({ name, number }) => {
+      contacts.find(contact => contact.name === name)
+        ? Report.warning(
+            `Can't add this contact!`,
+            `${name} is already in contacts.`,
+            'OK',
+          )
+        : setContacts(contacts => [
+            { id: nanoid(8), name, number },
+            ...contacts,
+          ]);
+    },
+    [contacts, setContacts],
+  );
 
   const deleteContact = contactId => {
     setContacts(contacts =>

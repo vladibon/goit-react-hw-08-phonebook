@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import s from './Input.module.scss';
 
@@ -39,4 +40,6 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export { Input };
+const MemoInput = memo(Input);
+
+export { MemoInput as Input };
