@@ -1,20 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix';
-import { Container } from './components/Container';
-import { ContactForm } from './components/ContactForm';
-import { Input } from './components/Input/Input';
-import { ContactList } from './components/ContactList';
+import { Container } from 'components/Container';
+import { ContactForm } from 'components/ContactForm';
+import { Input } from 'components/Input/Input';
+import { ContactList } from 'components/ContactList';
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 function App() {
-  const [contacts, setContacts] = useState(
-    JSON.parse(window.localStorage.getItem('contacts')) ?? [],
-  );
+  const [contacts, setContacts] = useLocalStorage('contacts', []);
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const handleSubmit = ({ name, number }) => {
     contacts.find(contact => contact.name === name)
@@ -40,8 +35,6 @@ function App() {
     );
   };
 
-  const visibleContacts = filterContacts();
-
   return (
     <Container>
       <h1>Phonebook</h1>
@@ -55,7 +48,13 @@ function App() {
         value={filter}
         onChange={setFilter}
       />
-      <ContactList contacts={visibleContacts} deleteContact={deleteContact} />
+
+      {contacts.length > 0 && (
+        <ContactList
+          contacts={filterContacts()}
+          deleteContact={deleteContact}
+        />
+      )}
     </Container>
   );
 }

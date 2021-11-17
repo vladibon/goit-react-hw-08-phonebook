@@ -11,10 +11,6 @@ function Input({
   required = false,
   onChange,
 }) {
-  const handleChange = ({ target: { value } }) => {
-    onChange(value);
-  };
-
   return (
     <label className={s.field}>
       <span className={s.label}>{labelName}</span>
@@ -26,7 +22,7 @@ function Input({
         pattern={pattern}
         title={title}
         required={required}
-        onChange={handleChange}
+        onChange={e => onChange(e.target.value)}
       />
     </label>
   );

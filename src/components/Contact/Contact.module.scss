@@ -1,0 +1,23 @@
+@import 'styles/shared';
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  padding-right: 58px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: $shadow;
+}
+
+.name {
+  min-width: 50%;
+  margin-bottom: 0;
+  margin-right: 40px;
+  font-weight: 400;
+}
+
+.number {
+  margin-right: auto;
+}
