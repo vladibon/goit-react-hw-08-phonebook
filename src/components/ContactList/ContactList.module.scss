@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
 .button {
   @extend %button;
   @extend %flexCentered;
