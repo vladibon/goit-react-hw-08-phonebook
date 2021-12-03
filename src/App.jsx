@@ -1,11 +1,13 @@
 import { useState, useCallback } from 'react';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 import { Report } from 'notiflix';
 import { Container } from 'components/Container';
 import { ContactForm } from 'components/ContactForm';
 import { Input } from 'components/Input/Input';
 import { ContactList } from 'components/ContactList';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+
+const nanoid = customAlphabet('1234567890', 8);
 
 function App() {
   const [contacts, setContacts] = useLocalStorage('contacts', []);
@@ -20,7 +22,7 @@ function App() {
             'OK',
           )
         : setContacts(contacts => [
-            { id: nanoid(8), name, number },
+            { id: nanoid(), name, number },
             ...contacts,
           ]);
     },
