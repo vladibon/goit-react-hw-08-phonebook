@@ -20,13 +20,6 @@
   right: 10px;
   min-width: 30px;
   padding: 4px;
-  color: $white-color;
+  color: $white-text-color;
   background-color: $delete-color;
-  opacity: 0.86;
-  transition: opacity $animation;
-}
-
-.button:hover,
-.button:focus {
-  opacity: 1;
 }

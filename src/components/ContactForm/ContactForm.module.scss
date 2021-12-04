@@ -11,15 +11,8 @@
   @extend %button;
   min-width: 100px;
   padding: 10px;
-  color: $white-color;
-  background-color: $button-color;
-
+  color: $white-text-color;
+  background-color: $add-color;
   box-shadow: $shadow;
-  opacity: 0.86;
-  transition: opacity $animation;
-}
-
-.button:hover,
-.button:focus {
-  opacity: 1;
+  text-transform: capitalize;
 }

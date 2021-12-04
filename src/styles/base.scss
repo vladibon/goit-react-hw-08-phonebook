@@ -2,10 +2,16 @@
 
 body {
   margin: 0;
-  color: $black-color;
+  color: $text-color;
+  background-color: $bg-color;
   font-family: $primary-font-stack;
   font-size: 18px;
   line-height: 1.4;
+}
+
+main {
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 img {
