@@ -13,6 +13,7 @@ function ContactList({ contacts, deleteContact }) {
           <button
             className={s.button}
             type='button'
+            aria-label='Delete contact'
             onClick={() => deleteContact(id)}
           >
             <MdDelete size='30' />
