@@ -7,7 +7,7 @@ import { Input } from 'components/Input/Input';
 import { ContactList } from 'components/ContactList';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
-const nanoid = customAlphabet('1234567890', 8);
+const nanoid = customAlphabet('0123456789', 8);
 
 function App() {
   const [contacts, setContacts] = useLocalStorage('contacts', []);
@@ -46,23 +46,28 @@ function App() {
   const visibleContacts = filterContacts();
 
   return (
-    <Container>
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={handleSubmit} />
+    <main>
+      <Container>
+        <h1>Phonebook</h1>
+        <ContactForm onSubmit={handleSubmit} />
 
-      <h2>Contacts</h2>
-      <Input
-        type='text'
-        name='filter'
-        labelName='Find contacts by name'
-        value={filter}
-        onChange={setFilter}
-      />
+        <h2>Contacts</h2>
+        <Input
+          type='text'
+          name='filter'
+          labelName='Find contacts by name'
+          value={filter}
+          onChange={setFilter}
+        />
 
-      {visibleContacts.length > 0 && (
-        <ContactList contacts={visibleContacts} deleteContact={deleteContact} />
-      )}
-    </Container>
+        {visibleContacts.length > 0 && (
+          <ContactList
+            contacts={visibleContacts}
+            deleteContact={deleteContact}
+          />
+        )}
+      </Container>
+    </main>
   );
 }
 
