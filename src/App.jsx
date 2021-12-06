@@ -1,44 +1,36 @@
-import { useState, useCallback } from 'react';
-import { customAlphabet } from 'nanoid';
+import { connect } from 'react-redux';
 import { Report } from 'notiflix';
+import { addContact, deleteContact, changeFilter } from 'redux/actions';
 import { Container } from 'components/Container';
 import { ContactForm } from 'components/ContactForm';
 import { Input } from 'components/Input/Input';
 import { ContactList } from 'components/ContactList';
-import { useLocalStorage } from 'hooks/useLocalStorage';
+// import { useLocalStorage } from 'hooks/useLocalStorage';
 
-const nanoid = customAlphabet('0123456789', 8);
+function App({
+  contacts,
+  filter,
+  onAddContact,
+  onDeleteContact,
+  onChangeFilter,
+}) {
+  // const [contacts, setContacts] = useLocalStorage('contacts', []);
+  // const [filter, setFilter] = useState('');
 
-function App() {
-  const [contacts, setContacts] = useLocalStorage('contacts', []);
-  const [filter, setFilter] = useState('');
-
-  const handleSubmit = useCallback(
-    ({ name, number }) => {
-      contacts.find(contact => contact.name === name)
-        ? Report.warning(
-            `Can't add this contact!`,
-            `${name} is already in contacts.`,
-            'OK',
-          )
-        : setContacts(contacts => [
-            { id: nanoid(), name, number },
-            ...contacts,
-          ]);
-    },
-    [contacts, setContacts],
-  );
-
-  const deleteContact = contactId => {
-    setContacts(contacts =>
-      contacts.filter(contact => contact.id !== contactId),
-    );
+  const handleSubmit = ({ name, number }) => {
+    contacts.find(contact => contact.name === name)
+      ? Report.warning(
+          `Can't add this contact!`,
+          `${name} is already in contacts.`,
+          'OK',
+        )
+      : onAddContact({ name, number });
   };
 
   const filterContacts = () => {
-    const normalizedFilter = filter.toLowerCase().trim();
+    const normalizedFilter = filter?.toLowerCase().trim();
 
-    return contacts.filter(contact =>
+    return contacts?.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter),
     );
   };
@@ -57,13 +49,13 @@ function App() {
           name='filter'
           labelName='Find contacts by name'
           value={filter}
-          onChange={setFilter}
+          onChange={onChangeFilter}
         />
 
-        {visibleContacts.length > 0 && (
+        {visibleContacts?.length > 0 && (
           <ContactList
             contacts={visibleContacts}
-            deleteContact={deleteContact}
+            deleteContact={onDeleteContact}
           />
         )}
       </Container>
@@ -71,4 +63,15 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = ({ items, filter }) => ({
+  contacts: items,
+  filter: filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onAddContact: contact => dispatch(addContact(contact)),
+  onDeleteContact: contactId => dispatch(deleteContact(contactId)),
+  onChangeFilter: filter => dispatch(changeFilter(filter)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
