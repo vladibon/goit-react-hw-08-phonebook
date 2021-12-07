@@ -1,12 +1,26 @@
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import todosActions from 'redux/contacts/contacts-actions';
 import { Contact } from 'components/Contact';
 import { MdDelete } from 'react-icons/md';
 import s from './ContactList.module.scss';
 
-function ContactList({ contacts, deleteContact }) {
+function ContactList() {
+  const { items, filter } = useSelector(({ contacts }) => contacts);
+  const dispatch = useDispatch();
+
+  const filterContacts = () => {
+    const normalizedFilter = filter.toLowerCase().trim();
+
+    return items.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
+
+  const visibleContacts = filterContacts();
+
   return (
     <ul className={s.list}>
-      {contacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, number }) => (
         <li key={id} className={s.item}>
           <Contact name={name} number={number} />
 
@@ -14,7 +28,7 @@ function ContactList({ contacts, deleteContact }) {
             className={s.button}
             type='button'
             aria-label='Delete contact'
-            onClick={() => deleteContact(id)}
+            onClick={() => dispatch(todosActions.deleteContact(id))}
           >
             <MdDelete size='30' />
           </button>
@@ -24,11 +38,4 @@ function ContactList({ contacts, deleteContact }) {
   );
 }
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
-  ).isRequired,
-  deleteContact: PropTypes.func.isRequired,
-};
-
-export { ContactList };
+export default ContactList;

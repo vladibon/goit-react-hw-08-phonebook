@@ -1,16 +1,27 @@
-import { useState, memo } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Report } from 'notiflix';
+import todosActions from 'redux/contacts/contacts-actions';
 import { Input } from 'components/Input';
 import s from './ContactForm.module.scss';
 
-function ContactForm({ onSubmit }) {
+function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const { items } = useSelector(({ contacts }) => contacts);
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit({ name, number });
+    items.find(contact => contact.name === name)
+      ? Report.warning(
+          `Can't add this contact!`,
+          `${name} is already in contacts.`,
+          'OK',
+        )
+      : dispatch(todosActions.addContact({ name, number }));
+
     clearForm();
   };
 
@@ -48,10 +59,4 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const MemoContactForm = memo(ContactForm);
-
-export { MemoContactForm as ContactForm };
+export default ContactForm;

@@ -1,10 +1,10 @@
 import { customAlphabet } from 'nanoid';
-import types from './types';
+import actionTypes from './contacts-types';
 
 const nanoid = customAlphabet('0123456789', 8);
 
 const addContact = ({ name, number }) => ({
-  type: types.ADD,
+  type: actionTypes.ADD,
   payload: {
     id: nanoid(),
     name,
@@ -13,13 +13,15 @@ const addContact = ({ name, number }) => ({
 });
 
 const deleteContact = contactId => ({
-  type: types.DELETE,
-  payload: { contactId },
+  type: actionTypes.DELETE,
+  payload: contactId,
 });
 
 const changeFilter = filter => ({
-  type: types.CHANGE_FILTER,
+  type: actionTypes.CHANGE_FILTER,
   payload: filter,
 });
 
-export { addContact, deleteContact, changeFilter };
+const todosActions = { addContact, deleteContact, changeFilter };
+
+export default todosActions;
