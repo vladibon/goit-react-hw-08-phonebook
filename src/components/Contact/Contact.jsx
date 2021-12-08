@@ -15,4 +15,4 @@ Contact.propTypes = {
   number: PropTypes.string.isRequired,
 };
 
-export { Contact };
+export default Contact;

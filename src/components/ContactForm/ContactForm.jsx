@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Report } from 'notiflix';
-import { addContact } from 'redux/contacts/contacts-actions';
-import { Input } from 'components/Input';
+import contactsActions from 'redux/contacts/contacts-actions';
+import Input from 'components/Input';
 import s from './ContactForm.module.scss';
 
 function ContactForm() {
@@ -20,7 +20,7 @@ function ContactForm() {
           `${name} is already in contacts.`,
           'OK',
         )
-      : dispatch(addContact({ name, number }));
+      : dispatch(contactsActions.addContact({ name, number }));
 
     clearForm();
   };

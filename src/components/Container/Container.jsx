@@ -4,4 +4,4 @@ const Container = ({ children }) => (
   <div className={s.container}>{children}</div>
 );
 
-export { Container };
+export default Container;

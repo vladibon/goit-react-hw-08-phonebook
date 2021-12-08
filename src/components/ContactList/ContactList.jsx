@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contacts/contacts-actions';
-import { Contact } from 'components/Contact';
+import contactsActions from 'redux/contacts/contacts-actions';
+import Contact from 'components/Contact';
 import { MdDelete } from 'react-icons/md';
 import s from './ContactList.module.scss';
 
@@ -28,7 +28,7 @@ function ContactList() {
             className={s.button}
             type='button'
             aria-label='Delete contact'
-            onClick={() => dispatch(deleteContact(id))}
+            onClick={() => dispatch(contactsActions.deleteContact(id))}
           >
             <MdDelete size='30' />
           </button>

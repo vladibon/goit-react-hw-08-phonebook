@@ -1,5 +1,7 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
-import { addContact, deleteContact, changeFilter } from './contacts-actions';
+import contactsActions from './contacts-actions';
+
+const { addContact, deleteContact, changeFilter } = contactsActions;
 
 const items = createReducer([], builder =>
   builder

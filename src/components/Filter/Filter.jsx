@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/contacts/contacts-actions';
+import contactsActions from 'redux/contacts/contacts-actions';
 import s from './Filter.module.scss';
 
 function Filter({ labelName }) {
@@ -15,7 +15,7 @@ function Filter({ labelName }) {
         type='text'
         name='filter'
         value={filter}
-        onChange={e => dispatch(changeFilter(e.target.value))}
+        onChange={e => dispatch(contactsActions.changeFilter(e.target.value))}
       />
     </label>
   );

@@ -39,4 +39,4 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export { Input };
+export default Input;
