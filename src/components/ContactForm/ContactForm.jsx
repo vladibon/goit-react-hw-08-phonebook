@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Report } from 'notiflix';
 import contactsActions from 'redux/contacts/contacts-actions';
-import Input from 'components/Input';
+import Input from 'components/ContactForm/Input';
 import s from './ContactForm.module.scss';
 
 function ContactForm() {

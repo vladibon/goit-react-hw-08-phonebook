@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import contactsActions from 'redux/contacts/contacts-actions';
-import Contact from 'components/Contact';
+import Contact from 'components/ContactList/Contact';
 import { MdDelete } from 'react-icons/md';
 import s from './ContactList.module.scss';
 
