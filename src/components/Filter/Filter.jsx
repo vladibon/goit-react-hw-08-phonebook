@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import todosActions from 'redux/contacts/contacts-actions';
+import { changeFilter } from 'redux/contacts/contacts-actions';
 import s from './Filter.module.scss';
 
 function Filter({ labelName }) {
-  const filter = useSelector(({ contacts }) => contacts.filter);
+  const { filter } = useSelector(({ contacts }) => contacts);
   const dispatch = useDispatch();
 
   return (
@@ -15,7 +15,7 @@ function Filter({ labelName }) {
         type='text'
         name='filter'
         value={filter}
-        onChange={e => dispatch(todosActions.changeFilter(e.target.value))}
+        onChange={e => dispatch(changeFilter(e.target.value))}
       />
     </label>
   );
