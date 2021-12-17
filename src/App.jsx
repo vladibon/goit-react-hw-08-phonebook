@@ -1,12 +1,9 @@
-import { useSelector } from 'react-redux';
 import Container from 'components/Container';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 
 function App() {
-  const { items } = useSelector(({ contacts }) => contacts);
-
   return (
     <main>
       <Container>
@@ -15,8 +12,7 @@ function App() {
 
         <h2>Contacts</h2>
         <Filter labelName='Find contacts by name' />
-
-        {items.length > 0 && <ContactList />}
+        <ContactList />
       </Container>
     </main>
   );

@@ -1,40 +1,48 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import contactsActions from 'redux/contacts/contacts-actions';
+import {
+  fetchContacts,
+  deleteContact,
+} from 'redux/contacts/contacts-operations';
+import {
+  getVisibleContacts,
+  getLoading,
+} from 'redux/contacts/contacts-selectors';
 import Contact from 'components/ContactList/Contact';
+import Loading from 'components/Loading';
 import { MdDelete } from 'react-icons/md';
 import s from './ContactList.module.scss';
 
 function ContactList() {
-  const { items, filter } = useSelector(({ contacts }) => contacts);
+  const contacts = useSelector(getVisibleContacts);
+  const loading = useSelector(getLoading);
   const dispatch = useDispatch();
 
-  const filterContacts = () => {
-    const normalizedFilter = filter.toLowerCase().trim();
-
-    return items.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
-  };
-
-  const visibleContacts = filterContacts();
+  useEffect(() => dispatch(fetchContacts()), [dispatch]);
 
   return (
-    <ul className={s.list}>
-      {visibleContacts.map(({ id, name, number }) => (
-        <li key={id} className={s.item}>
-          <Contact name={name} number={number} />
+    <>
+      {contacts.length > 0 && (
+        <ul className={s.list}>
+          {contacts.map(({ id, name, phone }) => (
+            <li key={id} className={s.item}>
+              <Contact name={name} phone={phone} />
 
-          <button
-            className={s.button}
-            type='button'
-            aria-label='Delete contact'
-            onClick={() => dispatch(contactsActions.deleteContact(id))}
-          >
-            <MdDelete size='30' />
-          </button>
-        </li>
-      ))}
-    </ul>
+              <button
+                className={s.button}
+                type='button'
+                aria-label='Delete contact'
+                onClick={() => dispatch(deleteContact(id))}
+              >
+                <MdDelete size='30' />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {loading && <Loading />}
+    </>
   );
 }
 
