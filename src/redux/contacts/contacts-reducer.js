@@ -1,47 +1,41 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import {
-  fetchContactsRequest,
-  fetchContactsSuccess,
-  fetchContactsError,
-  addContactRequest,
-  addContactSuccess,
-  addContactError,
-  deleteContactRequest,
-  deleteContactSuccess,
-  deleteContactError,
-  changeFilter,
-} from './contacts-actions';
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from 'redux/contacts/contacts-operations';
+import { changeFilter } from './contacts-actions';
 
 const items = createReducer([], builder =>
   builder
-    .addCase(fetchContactsSuccess, (_, { payload }) => payload)
-    .addCase(addContactSuccess, (state, { payload }) => [payload, ...state])
-    .addCase(deleteContactSuccess, (state, { payload }) =>
+    .addCase(fetchContacts.fulfilled, (_, { payload }) => payload)
+    .addCase(addContact.fulfilled, (state, { payload }) => [...state, payload])
+    .addCase(deleteContact.fulfilled, (state, { payload }) =>
       state.filter(({ id }) => id !== payload),
     ),
 );
 
 const loading = createReducer(false, builder =>
   builder
-    .addCase(fetchContactsRequest, () => true)
-    .addCase(fetchContactsSuccess, () => false)
-    .addCase(fetchContactsError, () => false)
-    .addCase(addContactRequest, () => true)
-    .addCase(addContactSuccess, () => false)
-    .addCase(addContactError, () => false)
-    .addCase(deleteContactRequest, () => true)
-    .addCase(deleteContactSuccess, () => false)
-    .addCase(deleteContactError, () => false),
+    .addCase(fetchContacts.pending, () => true)
+    .addCase(fetchContacts.fulfilled, () => false)
+    .addCase(fetchContacts.rejected, () => false)
+    .addCase(addContact.pending, () => true)
+    .addCase(addContact.fulfilled, () => false)
+    .addCase(addContact.rejected, () => false)
+    .addCase(deleteContact.pending, () => true)
+    .addCase(deleteContact.fulfilled, () => false)
+    .addCase(deleteContact.rejected, () => false),
 );
 
 const error = createReducer(null, builder =>
   builder
-    .addCase(fetchContactsError, (_, { payload }) => payload)
-    .addCase(fetchContactsRequest, () => null)
-    .addCase(addContactError, (_, { payload }) => payload)
-    .addCase(addContactRequest, () => null)
-    .addCase(deleteContactError, (_, { payload }) => payload)
-    .addCase(deleteContactRequest, () => null),
+    .addCase(fetchContacts.rejected, (_, { error }) => error)
+    .addCase(fetchContacts.pending, () => null)
+    .addCase(addContact.rejected, (_, { error }) => error)
+    .addCase(addContact.pending, () => null)
+    .addCase(deleteContact.rejected, (_, { error }) => error)
+    .addCase(deleteContact.pending, () => null),
 );
 
 const filter = createReducer('', builder =>
