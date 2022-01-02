@@ -42,4 +42,9 @@ const filter = createReducer('', builder =>
   builder.addCase(changeFilter, (_, { payload }) => payload),
 );
 
-export default combineReducers({ items, filter, loading, error });
+export const contactsReducer = combineReducers({
+  items,
+  filter,
+  loading,
+  error,
+});

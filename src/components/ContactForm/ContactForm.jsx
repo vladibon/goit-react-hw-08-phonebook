@@ -8,7 +8,7 @@ import s from './ContactForm.module.scss';
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -21,14 +21,14 @@ function ContactForm() {
           `${name} is already in contacts.`,
           'OK',
         )
-      : dispatch(addContact({ name, phone }));
+      : dispatch(addContact({ name, number }));
 
     clearForm();
   };
 
   const clearForm = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -46,13 +46,13 @@ function ContactForm() {
 
       <Input
         type='tel'
-        name='phone'
-        labelName='Phone'
-        value={phone}
+        name='number'
+        labelName='Number'
+        value={number}
         pattern='\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
         title='Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
         required
-        onChange={setPhone}
+        onChange={setNumber}
       />
 
       <button className={s.button} type='submit'>
