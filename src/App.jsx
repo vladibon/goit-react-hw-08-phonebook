@@ -7,15 +7,10 @@ import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import { authOperations, authSelectors } from 'redux/auth';
 
-// const HomePage = lazy(() =>
-//   import('pages/HomePage' /* webpackChunkName: "home-page" */),
-// );
 const RegisterPage = lazy(() =>
   import('pages/RegisterPage' /* webpackChunkName: "register-page" */),
 );
-const LoginPage = lazy(() =>
-  import('pages/LoginPage' /* webpackChunkName: "login-page" */),
-);
+const LoginPage = lazy(() => import('pages/LoginPage' /* webpackChunkName: "login-page" */));
 const ContactsPage = lazy(() =>
   import('pages/ContactsPage' /* webpackChunkName: "contacts-page" */),
 );
@@ -33,15 +28,6 @@ function App() {
       {isRefreshed ? (
         <Suspense fallback={<Loading />}>
           <Routes>
-            {/* <Route
-            path='/'
-            element={
-              <PrivateRoute>
-                <HomePage />
-              </PrivateRoute>
-            }
-          /> */}
-
             <Route
               path='/register'
               element={
