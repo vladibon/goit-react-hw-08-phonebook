@@ -1,14 +1,7 @@
 @import 'styles/shared';
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $overlay-bg-color;
+.container {
+  @extend %flexCentered;
+  padding-top: 100px;
   z-index: 1200;
 }

@@ -8,11 +8,11 @@ function AuthNav() {
   return (
     <div>
       <NavLink to='/register' className={applyClassName}>
-        Register
+        Sign Up
       </NavLink>
 
       <NavLink to='/login' className={applyClassName}>
-        Login
+        Log In
       </NavLink>
     </div>
   );

@@ -12,7 +12,7 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('auth/register', async credentials => {
+const signUp = createAsyncThunk('auth/signup', async credentials => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
     token.set(data.token);
@@ -51,7 +51,7 @@ const fetchCurrentUser = createAsyncThunk(
 );
 
 const authOperations = {
-  register,
+  signUp,
   logOut,
   logIn,
   fetchCurrentUser,

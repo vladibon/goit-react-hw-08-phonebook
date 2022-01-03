@@ -1,0 +1,9 @@
+@import 'styles/shared';
+
+.button {
+  @extend %button;
+  min-width: 100px;
+  padding: 10px;
+  color: $white-text-color;
+  background-color: $accent-color;
+}

@@ -1,10 +1,14 @@
+import Container from 'components/Container';
 import Loader from 'react-loader-spinner';
+
 import s from './Loading.module.scss';
 
 const Loading = () => (
-  <div className={s.overlay}>
-    <Loader type='Oval' color='#01b4e4' height={120} width={120} />
-  </div>
+  <Container>
+    <div className={s.container}>
+      <Loader type='Oval' color='#4d8679' width='100' height='100' />
+    </div>
+  </Container>
 );
 
 export default Loading;

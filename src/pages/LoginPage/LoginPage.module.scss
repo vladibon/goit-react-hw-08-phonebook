@@ -1,0 +1,10 @@
+@import 'styles/shared';
+
+.page {
+  @extend %show-animation;
+}
+
+.form {
+  @extend %form;
+  margin-left: 50%;
+}

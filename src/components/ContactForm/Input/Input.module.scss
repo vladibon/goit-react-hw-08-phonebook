@@ -2,12 +2,7 @@
 
 .field {
   display: block;
-  width: calc(50% - 15px);
   margin-bottom: 20px;
-
-  &:nth-child(2n + 1) {
-    margin-right: 30px;
-  }
 }
 
 .label {
@@ -20,5 +15,5 @@
   padding: 10px;
   border-radius: 4px;
   color: inherit;
-  background-color: inherit;
+  background-color: $bg-color;
 }

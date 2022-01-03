@@ -12,7 +12,7 @@ const { reducer } = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(authOperations.register.fulfilled, (s, { payload }) => {
+      .addCase(authOperations.signUp.fulfilled, (s, { payload }) => {
         s.user = payload.user;
         s.token = payload.token;
       })

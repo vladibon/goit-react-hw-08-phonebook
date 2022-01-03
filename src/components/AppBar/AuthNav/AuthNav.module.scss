@@ -9,6 +9,11 @@
   font-weight: 500;
   text-decoration: none;
   color: inherit;
+
+  &:hover,
+  &:focus {
+    color: $accent-color;
+  }
 }
 
 .activeLink {

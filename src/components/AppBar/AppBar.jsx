@@ -3,27 +3,22 @@ import Container from 'components/Container';
 import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
 import { authSelectors } from 'redux/auth';
-
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-};
+import s from './AppBar.module.scss';
 
 function AppBar() {
   const isRefreshed = useSelector(authSelectors.getIsRefreshed);
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   return (
-    <Container>
-      <header style={styles.header}>
-        <h1>Phonebook</h1>
+    <header className={s.header}>
+      <Container>
+        <div className={s.content}>
+          <h1>Contacts</h1>
 
-        {isRefreshed && (isLoggedIn ? <UserMenu /> : <AuthNav />)}
-      </header>
-    </Container>
+          {isRefreshed && (isLoggedIn ? <UserMenu /> : <AuthNav />)}
+        </div>
+      </Container>
+    </header>
   );
 }
 

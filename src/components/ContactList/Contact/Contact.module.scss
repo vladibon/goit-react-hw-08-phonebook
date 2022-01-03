@@ -3,10 +3,9 @@
 .contact {
   display: flex;
   align-items: center;
-  padding: 14px;
+  width: 100%;
+  padding: 24px;
   padding-right: 58px;
-  border-radius: 4px;
-  box-shadow: $shadow;
 }
 
 .name {

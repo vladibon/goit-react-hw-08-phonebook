@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Report } from 'notiflix';
 import { contactsSelectors, contactsOperations } from 'redux/contacts';
-import Input from 'components/ContactForm/Input';
+import Input from './Input';
+import Button from './Button';
 import s from './ContactForm.module.scss';
 
 function ContactForm() {
@@ -50,9 +51,7 @@ function ContactForm() {
         onChange={setNumber}
       />
 
-      <button className={s.button} type='submit'>
-        Add contact
-      </button>
+      <Button type='submit'>Add contact</Button>
     </form>
   );
 }

@@ -1,18 +1,7 @@
 @import 'styles/shared';
 
 .form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  margin-bottom: 40px;
-}
-
-.button {
-  @extend %button;
-  min-width: 100px;
-  padding: 10px;
-  color: $white-text-color;
-  background-color: $add-color;
-  box-shadow: $shadow;
-  text-transform: capitalize;
+  @extend %form;
+  margin-bottom: 30px;
+  margin-left: 30px;
 }

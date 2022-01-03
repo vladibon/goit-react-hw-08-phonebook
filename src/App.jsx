@@ -7,9 +7,7 @@ import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import { authOperations, authSelectors } from 'redux/auth';
 
-const RegisterPage = lazy(() =>
-  import('pages/RegisterPage' /* webpackChunkName: "register-page" */),
-);
+const SignUpPage = lazy(() => import('pages/SignUpPage' /* webpackChunkName: "signup-page" */));
 const LoginPage = lazy(() => import('pages/LoginPage' /* webpackChunkName: "login-page" */));
 const ContactsPage = lazy(() =>
   import('pages/ContactsPage' /* webpackChunkName: "contacts-page" */),
@@ -25,21 +23,21 @@ function App() {
     <>
       <AppBar />
 
-      {isRefreshed ? (
-        <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
+        {isRefreshed ? (
           <Routes>
             <Route
               path='/register'
               element={
-                <PublicRoute>
-                  <RegisterPage />
+                <PublicRoute redirectPath='/contacts'>
+                  <SignUpPage />
                 </PublicRoute>
               }
             />
             <Route
               path='/login'
               element={
-                <PublicRoute>
+                <PublicRoute redirectPath='/contacts'>
                   <LoginPage />
                 </PublicRoute>
               }
@@ -47,17 +45,17 @@ function App() {
             <Route
               path='/contacts'
               element={
-                <PrivateRoute>
+                <PrivateRoute redirectPath='/login'>
                   <ContactsPage />
                 </PrivateRoute>
               }
             />
             <Route path='*' element={<Navigate replace to='/contacts' />} />
           </Routes>
-        </Suspense>
-      ) : (
-        <Loading />
-      )}
+        ) : (
+          <Loading />
+        )}
+      </Suspense>
     </>
   );
 }

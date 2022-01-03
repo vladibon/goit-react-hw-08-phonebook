@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { authOperations } from 'redux/auth';
 import Container from 'components/Container';
 import Input from 'components/ContactForm/Input';
-import s from 'components/ContactForm/ContactForm.module.scss';
+import Button from 'components/ContactForm/Button';
+import s from './LoginPage.module.scss';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -18,18 +19,10 @@ function LoginPage() {
   };
 
   return (
-    <main>
+    <main className={s.page}>
       <Container>
-        <h1>Login Page</h1>
-
         <form className={s.form} onSubmit={handleSubmit}>
-          <Input
-            type='email'
-            name='email'
-            labelName='Email'
-            value={email}
-            onChange={setEmail}
-          />
+          <Input type='email' name='email' labelName='Email' value={email} onChange={setEmail} />
 
           <Input
             type='password'
@@ -39,9 +32,7 @@ function LoginPage() {
             onChange={setPassword}
           />
 
-          <button className={s.button} type='submit'>
-            Login
-          </button>
+          <Button type='submit'>Log in</Button>
         </form>
       </Container>
     </main>
