@@ -10,9 +10,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import logger from 'redux-logger';
 
-import { contactsReducer } from './contacts/contacts-reducer';
+import { contactsReducer } from './contacts';
 import { authReducer } from './auth';
 
 const middleware = getDefaultMiddleware =>
@@ -20,7 +19,7 @@ const middleware = getDefaultMiddleware =>
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }).concat(logger);
+  });
 
 const authPersistConfig = {
   key: 'auth',

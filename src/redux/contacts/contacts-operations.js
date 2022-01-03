@@ -1,29 +1,38 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-const pathname = 'contacts';
-
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchContacts',
-  async () => {
-    const { data } = await axios.get(pathname);
+const fetchContacts = createAsyncThunk('contacts/fetchContacts', async () => {
+  try {
+    const { data } = await axios.get('/contacts');
     return data;
-  },
-);
+  } catch (error) {}
+});
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async contact => {
-    const { data } = await axios.post(pathname, contact);
+const addContact = createAsyncThunk('contacts/addContact', async contact => {
+  try {
+    const { data } = await axios.post('/contacts', contact);
     return data;
-  },
-);
+  } catch (error) {}
+});
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact',
-  async contactId => {
-    await axios.delete(`${pathname}/${contactId}`);
+const deleteContact = createAsyncThunk('contacts/deleteContact', async contactId => {
+  try {
+    await axios.delete(`/contacts/${contactId}`);
     return contactId;
-  },
-);
+  } catch (error) {}
+});
+
+const updateContact = createAsyncThunk('contacts/updateContact', async ({ contactId, contact }) => {
+  try {
+    const { data } = await axios.patch(`/contacts/${contactId}`, contact);
+    return data;
+  } catch (error) {}
+});
+
+const contactsOperations = {
+  fetchContacts,
+  addContact,
+  deleteContact,
+  updateContact,
+};
+export default contactsOperations;

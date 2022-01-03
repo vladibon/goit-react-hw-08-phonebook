@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import Container from 'components/Container';
-// import Navigation from './Navigation';
 import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
 import { authSelectors } from 'redux/auth';
@@ -20,7 +19,8 @@ function AppBar() {
   return (
     <Container>
       <header style={styles.header}>
-        {/* <Navigation /> */}
+        <h1>Phonebook</h1>
+
         {isRefreshed && (isLoggedIn ? <UserMenu /> : <AuthNav />)}
       </header>
     </Container>

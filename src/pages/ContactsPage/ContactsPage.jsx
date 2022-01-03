@@ -7,7 +7,7 @@ function ContactsPage() {
   return (
     <main>
       <Container>
-        <h1>Phonebook</h1>
+        <h2>Add new contact</h2>
         <ContactForm />
 
         <h2>Contacts</h2>

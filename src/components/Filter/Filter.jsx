@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/contacts/contacts-actions';
-import { getFilter } from 'redux/contacts/contacts-selectors';
+import { contactsSelectors, changeFilter } from 'redux/contacts';
 import s from './Filter.module.scss';
 
 function Filter({ labelName }) {
-  const filter = useSelector(getFilter);
+  const filter = useSelector(contactsSelectors.getFilter);
   const dispatch = useDispatch();
 
   return (

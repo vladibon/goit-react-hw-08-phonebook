@@ -1,27 +1,22 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Report } from 'notiflix';
-import { addContact } from 'redux/contacts/contacts-operations';
-import { getContacts } from 'redux/contacts/contacts-selectors';
+import { contactsSelectors, contactsOperations } from 'redux/contacts';
 import Input from 'components/ContactForm/Input';
 import s from './ContactForm.module.scss';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
 
     contacts.find(contact => contact.name === name)
-      ? Report.warning(
-          `Can't add this contact!`,
-          `${name} is already in contacts.`,
-          'OK',
-        )
-      : dispatch(addContact({ name, number }));
+      ? Report.warning(`Can't add this contact!`, `${name} is already in contacts.`, 'OK')
+      : dispatch(contactsOperations.addContact({ name, number }));
 
     clearForm();
   };
