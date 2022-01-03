@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-export default function UserMenu() {
+function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.getUsername);
   // const avatar = defaultAvatar;
@@ -31,3 +31,5 @@ export default function UserMenu() {
     </div>
   );
 }
+
+export default UserMenu;

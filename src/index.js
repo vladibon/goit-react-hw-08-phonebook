@@ -7,7 +7,7 @@ import { store, persistor } from 'redux/store';
 import App from 'App';
 import Loading from 'components/Loading';
 import 'notiflix/dist/notiflix-aio-3.1.0.min.js';
-import 'utils/notiflix-config';
+import 'configs/notiflix-config';
 import 'modern-normalize/modern-normalize.css';
 import 'styles/base.scss';
 
