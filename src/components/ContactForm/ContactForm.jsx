@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Report } from 'notiflix';
 import { contactsSelectors, contactsOperations } from 'redux/contacts';
+import { useFetchContactsQuery, useAddContactMutation } from 'redux/contacts/contacts-api';
 import Input from './Input';
 import Button from './Button';
 import s from './ContactForm.module.scss';
@@ -9,15 +10,20 @@ import s from './ContactForm.module.scss';
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(contactsSelectors.getContacts);
+  // const contacts = useSelector(contactsSelectors.getContacts);
   const dispatch = useDispatch();
+
+  // const { data: contacts } = useFetchContactsQuery();
+  const [addContact, { isLoading, isSuccess }] = useAddContactMutation();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    contacts.find(contact => contact.name === name)
-      ? Report.warning(`Can't add this contact!`, `${name} is already in contacts.`, 'OK')
-      : dispatch(contactsOperations.addContact({ name, number }));
+    // contacts.find(contact => contact.name === name)
+    //   ? Report.warning(`Can't add this contact!`, `${name} is already in contacts.`, 'OK')
+    //   : dispatch(contactsOperations.addContact({ name, number }));
+
+    addContact({ name, number });
 
     clearForm();
   };

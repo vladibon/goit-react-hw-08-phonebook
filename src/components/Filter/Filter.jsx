@@ -4,7 +4,7 @@ import { contactsSelectors, changeFilter } from 'redux/contacts';
 import s from './Filter.module.scss';
 
 function Filter({ labelName }) {
-  const filter = useSelector(contactsSelectors.getFilter);
+  // const filter = useSelector(contactsSelectors.getFilter);
   const dispatch = useDispatch();
 
   return (
@@ -14,7 +14,7 @@ function Filter({ labelName }) {
         className={s.input}
         type='text'
         name='filter'
-        value={filter}
+        // value={filter}
         onChange={e => dispatch(changeFilter(e.target.value))}
       />
     </label>

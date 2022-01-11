@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authOperations from './auth-operations';
 
+const { signUp, logIn, logOut, fetchCurrentUser } = authOperations;
+
 const initialState = {
   user: { name: null, email: null },
   token: null,
@@ -12,23 +14,23 @@ const { reducer } = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(authOperations.signUp.fulfilled, (s, { payload }) => {
+      .addCase(signUp.fulfilled, (s, { payload }) => {
         s.user = payload.user;
         s.token = payload.token;
       })
-      .addCase(authOperations.logIn.fulfilled, (s, { payload }) => {
+      .addCase(logIn.fulfilled, (s, { payload }) => {
         s.user = payload.user;
         s.token = payload.token;
       })
-      .addCase(authOperations.logOut.fulfilled, s => {
+      .addCase(logOut.fulfilled, s => {
         s.user = { name: null, email: null };
         s.token = null;
       })
-      .addCase(authOperations.fetchCurrentUser.fulfilled, (s, { payload }) => {
+      .addCase(fetchCurrentUser.fulfilled, (s, { payload }) => {
         s.user = payload;
         s.isRefreshed = true;
       })
-      .addCase(authOperations.fetchCurrentUser.rejected, s => {
+      .addCase(fetchCurrentUser.rejected, s => {
         s.isRefreshed = true;
       });
   },

@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { contactsSelectors, contactsOperations } from 'redux/contacts';
+import { useFetchContactsQuery, useDeleteContactMutation } from 'redux/contacts/contacts-api';
 import Contact from 'components/ContactList/Contact';
 import { MdDelete } from 'react-icons/md';
 import s from './ContactList.module.scss';
 
 function ContactList() {
-  const contacts = useSelector(contactsSelectors.getVisibleContacts);
-  const dispatch = useDispatch();
+  // const contacts = useSelector(contactsSelectors.getVisibleContacts);
+  // const dispatch = useDispatch();
+  const { data: contacts } = useFetchContactsQuery();
+  const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
 
-  useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
+  // useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
 
   return (
     <>
-      {contacts.length > 0 && (
+      {contacts && (
         <ul className={s.list}>
           {contacts.map(({ id, name, number }) => (
             <li key={id} className={s.item}>
@@ -23,7 +26,7 @@ function ContactList() {
                 className={s.button}
                 type='button'
                 aria-label='Delete contact'
-                onClick={() => dispatch(contactsOperations.deleteContact(id))}
+                onClick={() => deleteContact(id)}
               >
                 <MdDelete size='30' />
               </button>
